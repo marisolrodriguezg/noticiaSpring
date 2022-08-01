@@ -17,7 +17,7 @@
         <header>
 
             <div class="container">
-                <form th:action ="@{/noticia/modificar/__${noticia.numNoticia__}}" method="POST"> 
+                <form th:action ="@{/noticia/modificar/__${noticia.numNoticia}__}" method="POST"> 
 
                     <!--                    con el hidden ocultamos el id (numNoticia, para que no traiga pero no lo modifique-->
                     <input hidden th:value="${numNoticia}" name="numNoticia">
@@ -34,7 +34,7 @@
                         </div> 
                         <br> 
                         <div class="form-group my-3">
-                            <input th:value="${noticia.foto}" type="text" class="form-group" name="foto" placeholder="foto noticia">
+                            <input th:value="${noticia.fo}" type="text" class="form-group" name="fo" placeholder="fo noticia">
                         </div> 
                     </div>
                     <button type="submit" class="btn btn-primary mt-3 botones"> Actualizar</button>
