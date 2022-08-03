@@ -20,7 +20,7 @@
          <nav class="navbar" style="background-color:rgb(31 83 139 / 25%) " >
             <div class="container-fluid">
                 <a class="navbar-brand" href="#" >
-                    <img src="../static/fotos/descarga.jpg" alt="" width="30" height="24" class="d-inline-block align-text-top" >
+                    <img src="/fotos/descarga.jpg" alt="" width="30" height="24" class="d-inline-block align-text-top" >
                     EGG NOTICIAS
                 </a>
                 
@@ -43,8 +43,8 @@
 
             <h6 th:text="${noticia.alta}"></h6>
             
-                <img th:if="${noticia.foto!=null}" th:src="${'/foto/noticia?idNoticia=__${numNoticia}__' }" width="400px">
-                <img th:unless="${noticia.foto!=null}" style="display:none">
+               <img th:if="${noticia.foto!=null}" th:src="${'/foto/noticia?numNoticia=__${noticia.numNoticia}__' }" width="200px">
+                            <img th:unless="${noticia.foto!=null}" style="display:none"> 
                 <p th:text="${noticia.cuerpo}"></p>  
             </div>
 <!--            <label>Autor: </label>

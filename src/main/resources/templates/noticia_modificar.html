@@ -17,8 +17,8 @@
         <header>
 
             <div class="container">
-                <form th:action ="@{/noticia/modificar/__${noticia.numNoticia}__}" method="POST"> 
-
+                <form th:action ="@{/noticia/modificar/__${noticia.numNoticia}__}" method="POST"
+                          class="border p-3 form" enctype="multipart/form-data" > 
                     <!--                    con el hidden ocultamos el id (numNoticia, para que no traiga pero no lo modifique-->
                     <input hidden th:value="${numNoticia}" name="numNoticia">
 
@@ -34,7 +34,25 @@
                         </div> 
                         <br> 
                         <div class="form-group my-3">
-                            <input th:value="${noticia.fo}" type="text" class="form-group" name="fo" placeholder="fo noticia">
+                            <label>Foto Noticia: </label>
+                        <br>
+                               <img th:if="${noticia.foto!=null}" th:src="${'/foto/noticia?numNoticia=__${noticia.numNoticia}__' }" width="200px">
+                            <img th:unless="${noticia.foto!=null}" style="display:none"> 
+                        <br>
+                        <label for="imgNoticia"></label>
+                        <input type="file" name="archivo" onchange="loadFile(event)" id="imgNoticia" placeholder="Elige una foto.."/>
+                        <br>
+                        <br>
+                        <img id="output" width="400px">
+                        <script>
+                            var loadFile = function(event){
+                                var output = document.getElementById('output');
+                                output.src = URL.createObjectURL(event.target.files[0]);
+                                output.onload = function(){
+                                    URL.revokeObjectURL(output.src);
+                                };
+                            };
+                        </script>
                         </div> 
                     </div>
                     <button type="submit" class="btn btn-primary mt-3 botones"> Actualizar</button>

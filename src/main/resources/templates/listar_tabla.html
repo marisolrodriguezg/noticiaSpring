@@ -15,7 +15,7 @@
         <nav class="navbar bg-light">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#">
-                    <img src="../static/fotos/descarga.jpg" alt="" width="30" height="24" class="d-inline-block align-text-top">
+                    <img src="/fotos/descarga.jpg" alt="" width="30" height="24" class="d-inline-block align-text-top">
                     NOTICIAS
                 </a>
                 
@@ -30,7 +30,6 @@
                             <th scope="col">#</th>
                             <th scope="col" >Titulo</th>
                             <th scope="col">cuerpo</th>
-                            <th scope="col">fo</th>
                             <th scope="col">Editar</th>
                             <th scope="col">Eliminar</th>
                         </tr>
@@ -42,7 +41,7 @@
                             <th scope="row" th:text="${noticia.numNoticia}"></th>
                             <td th:text="${noticia.titulo}"></td>
                             <td th:text="${noticia.cuerpo}"></td>
-                            <td th:text="${noticia.fo}"></td>
+                   
                          <td><a th:href= "@{/noticia/modificar/__${noticia.numNoticia}__}" type="button" class="btn btn-success">Editar</a></td>
                           <td><a th:href= "@{/noticia/ocultar/__${noticia.numNoticia}__}" type="button" class="btn btn-success">Eliminar</a></td>
                             <td>

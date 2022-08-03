@@ -21,7 +21,7 @@ public class Noticia {
 
     private String titulo;
     private String cuerpo;
-    private String fo;
+   
 
     private boolean darAlta;
     @Temporal(TemporalType.DATE)
@@ -30,8 +30,6 @@ public class Noticia {
    @OneToOne 
    private Foto foto;
     
-   
-     
    
     
     public boolean isDarAlta() {
@@ -67,14 +65,6 @@ public class Noticia {
 
     public void setCuerpo(String cuerpo) {
         this.cuerpo = cuerpo;
-    }
-
-    public String getFo() {
-        return fo;
-    }
-
-    public void setFo(String fo) {
-        this.fo = fo;
     }
 
     public Date getAlta() {

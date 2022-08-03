@@ -1,6 +1,6 @@
-
 package com.egg.egg.news.controladores;
 
+import com.egg.egg.news.entidades.Foto;
 import com.egg.egg.news.entidades.Noticia;
 import com.egg.egg.news.exceptiones.MiException;
 import com.egg.egg.news.servicios.NoticiaServicio;
@@ -15,49 +15,41 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.egg.egg.news.exceptiones.MiException;
+import com.egg.egg.news.servicios.FotoServicio;
+import java.util.List;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
 @RequestMapping("/foto")
 public class FotoControlador {
-    
-//    @Autowired
-//    private AutorServicio autorServicio;
-//    
+
     @Autowired
     private NoticiaServicio noticiaServicio;
-//    
-//    @GetMapping("/autor")
-//    public ResponseEntity<byte[]> fotoAutor(@RequestParam String idAutor) throws Exception{
-//        Autor autor = autorServicio.buscarAutorPorId(idAutor);
-//        try{
-//            if(autor.getFoto()==null){
-//                throw new Exception ();
-//            }
-//            byte[] foto = autor.getFoto().getContent();
-//            HttpHeaders headers = new HttpHeaders();
-//            headers.setContentType(MediaType.IMAGE_JPEG);
-//            return new ResponseEntity<>(foto, headers, HttpStatus.OK);
-//        }catch(Exception ex){
-//            System.out.println("El usuario no tiene foto");
-//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//        }  
-//    }
-    
+    @Autowired
+    private FotoServicio fotoServicio;
+
         @GetMapping("/noticia")
-    public ResponseEntity<byte[]> fotoNoticia(@RequestParam String numNoticia) throws MiException{
+    public ResponseEntity<byte[]> fotoNoticia(@RequestParam String numNoticia) throws Exception{
         Noticia noticia = noticiaServicio.buscarNoticiaPorId(numNoticia);
-         try{
-        if(noticia.getFoto()==null){
-        
-        }
-        byte[] foto = noticia.getFoto().getContenido();
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.IMAGE_JPEG);
-        return new ResponseEntity<>(foto, headers, HttpStatus.OK);  
-     }catch(Exception ex){
+        try{
+            if(noticia.getFoto()==null){
+                throw new Exception ();
+            }
+            byte[] foto = noticia.getFoto().getContenido();
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.IMAGE_JPEG);
+            return new ResponseEntity<>(foto, headers, HttpStatus.OK);
+        }catch(Exception ex){
             System.out.println("La noticia no tiene foto");
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-         }
+        }  
+    }
+    
+    @GetMapping("/listar")
+    public String listarFotos (ModelMap modelo){
+        List <Foto> mostrarFotos=fotoServicio.listarFotos();
+        modelo.addAttribute("fotoLista", mostrarFotos);
+        return "mostrar_foto.html";
+    }
 }
-}
-  

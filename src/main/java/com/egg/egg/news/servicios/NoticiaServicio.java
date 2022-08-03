@@ -26,7 +26,7 @@ public class NoticiaServicio {
     private FotoServicio fotoServicio;    
     
     @Transactional //se pone en los que modifican la base de dato por si larga una exeption para que vuelva a iniciar
-    public void crearNoticia(MultipartFile archivo, String titulo, String cuerpo) throws MiException {
+    public void crearNoticia(MultipartFile archivo, String titulo, String cuerpo) throws MiException, Exception {
         
         validar(titulo, cuerpo);//llamamos al metodo de validacion de excepciones
 
@@ -46,16 +46,13 @@ public class NoticiaServicio {
     
     @Transactional(readOnly = true)
     public List<Noticia> listarActivos() throws MiException {
-        System.out.println("imprimir servicio");
         List<Noticia> lista = noticiaRepositorio.buscarActivos();
-        for (Noticia noticia : lista) {
-            System.out.println("" + noticia);
-        }
+        
         return lista;
     }
     
     @Transactional
-    public void modificarNoticia(MultipartFile archivo,String numNoticia, String titulo, String cuerpo) throws MiException {
+    public void modificarNoticia(MultipartFile archivo,String numNoticia, String titulo, String cuerpo) throws MiException, Exception {
         validar(titulo, cuerpo);//llamamos al metodo de validacion de excepciones 
 
         Optional<Noticia> respuesta = noticiaRepositorio.findById(numNoticia);//optional nos dice si esta  el numNoticia si es true continua
@@ -66,14 +63,11 @@ public class NoticiaServicio {
             noticia.setTitulo(titulo);
             noticia.setCuerpo(cuerpo);
             
-           String idFoto=null;
-           if(noticia.getFoto()!= null){
-               idFoto =noticia.getFoto().getId();
-           }
-            
-           Foto foto =fotoServicio.actualizar(idFoto, archivo);
-           noticia.setFoto(foto);
-
+               if(archivo != null){
+                Foto foto = fotoServicio.guardar(archivo);
+                noticia.setFoto(foto);
+            }
+       
             noticiaRepositorio.save(noticia);//para guardar nuevamente en la bae de datos
 
         }

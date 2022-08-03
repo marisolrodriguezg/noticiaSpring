@@ -19,11 +19,12 @@
             <div class="container">
                 <div class="abs-center">
                     <a class="navbar-brand" href="#">
-                        <img src="../static/fotos/descarga.jpg" alt="" width="30" height="24" class="d-inline-block align-text-top">
-                       Noticias 
+                        <img src="/fotos/descarga.jpg" alt="" width="30" height="24" class="d-inline-block align-text-top">
+                        Noticias 
                     </a>
                     <a href="/admin" class="btn btn-primary"  role="button"style="margin: 3cm;" >Volver</a>
-                    <form action ="/noticia/registro" method="POST"class="border p-3 form"> 
+                    <form th:action ="@{/noticia/registro}" method="POST"
+                          class="border p-3 form" enctype="multipart/form-data" > 
 
                         <div class="form-group">
                             <h1> crear noticia </h1>
@@ -36,9 +37,9 @@
                                 <label for="text">Cuerpo</label>
                                 <input type="text" class="form-control" name="cuerpo" placeholder="cuerpo noticia">
                             </div> 
-                           
+
                             <label for="text">Noticia</label>
-                             <br> 
+                            <br> 
                             <label for="imgNoticia"></label>
                             <input type="file" name="archivo" onchange="loadFile(event)" id="imgNoticia" placeholder="Elige una foto.."/>
                             <br>

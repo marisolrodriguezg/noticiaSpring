@@ -1,4 +1,3 @@
-
 package com.egg.egg.news.entidades;
 
 import java.util.Date;
@@ -13,25 +12,27 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import org.hibernate.annotations.GenericGenerator;
 import lombok.Data;
+
 @Entity
 @Data
 public class Foto {
-    
-    @Id   
-    @GeneratedValue(generator="uuid") //genera un id 
-    @GenericGenerator(name="uuid", strategy = "uuid2") //para qye no se repita el id
+
+    @Id
+    @GeneratedValue(generator = "uuid") //genera un id 
+    @GenericGenerator(name = "uuid", strategy = "uuid2") //para qye no se repita el id
     private String id;
-    
-    private String nombre;;
+
+    private String nombre;
+    ;
     
     private String mime;
-    
-    @Lob 
-    @Basic(fetch= FetchType.LAZY)//hace que los cueris sean mas livianos, 
+
+    @Lob
+    @Basic(fetch = FetchType.LAZY)//hace que los cueris sean mas livianos, 
     private byte[] contenido;
-@Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.DATE)
     private Date fCreacion;
-   
+
     private boolean estado;
 
     public void setfCreacion(Date fCreacion) {
@@ -41,6 +42,7 @@ public class Foto {
     public void setEstado(boolean estado) {
         this.estado = estado;
     }
+
     /**
      * @return the id
      */
@@ -110,7 +112,5 @@ public class Foto {
     public boolean isEstado() {
         return estado;
     }
-    
-    
-    
+
 }

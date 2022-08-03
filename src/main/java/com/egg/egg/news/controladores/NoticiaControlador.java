@@ -33,7 +33,7 @@ public class NoticiaControlador {
     }
 
     @PostMapping("/registro")//ingresa una vez que presionamos el "subir", vijan os parametros hasta aca 
-    public String registro(MultipartFile archivo, @RequestParam String titulo, @RequestParam(required = false) String cuerpo , ModelMap modelo) {
+    public String registro(@RequestParam ("archivo") MultipartFile archivo, @RequestParam String titulo, @RequestParam(required = false) String cuerpo , ModelMap modelo) throws Exception {
         //se pone el request false para que entre en a exeption y pueda manejarlo con el servicio
         //model maps: modelo se usa para mostrar por pantalla del lado del usuario
         try {
@@ -45,7 +45,6 @@ public class NoticiaControlador {
 
             modelo.put("error", ex.getMessage());
 
-            Logger.getLogger(NoticiaControlador.class.getName()).log(Level.SEVERE, null, ex);
             return "noticia_form.html";
 
         }
@@ -97,7 +96,7 @@ public class NoticiaControlador {
 
 //continua del de arriba envia los datos ya modificados
     @PostMapping("/modificar/{numNoticia}")
-    public String modificar(MultipartFile archivo,@RequestParam(required = false) String numNoticia, @RequestParam(required = false) String nombre, @RequestParam(required = false) String titulo, @RequestParam(required = false) String cuerpo, ModelMap modelo) {
+    public String modificar(MultipartFile archivo,@RequestParam(required = false) String numNoticia, @RequestParam(required = false) String nombre, @RequestParam(required = false) String titulo, @RequestParam(required = false) String cuerpo, ModelMap modelo) throws Exception {
         try {
             noticiaServicio.modificarNoticia(archivo,numNoticia, titulo, cuerpo);
             return "redirect:/noticia/listar";//te redirecciona la la lista con la noticia modificada
